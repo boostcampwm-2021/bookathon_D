@@ -8,7 +8,8 @@ const userSchema = new Schema({
   sessionid: {type:Number, required:true},
   total:{type:Number,default:0},
   today:{type:Number,default:0},
-  timelog:{type:Array,default:[]}
+  timelog:{type:Array,default:[]},
+  tasklist:{type:Array,default:[]}
 });
 
 module.exports = mongoose.model('user', userSchema)
