@@ -2,8 +2,8 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
-    font-family: 'SCDream';
-    src: /Users/maxcha/bookathon_D/client/src/assets/font/SCDream5.otf format('otf');
+    font-family: 'NeoDunggeunmo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
     font-weight: normal;
     font-style: normal;
   }

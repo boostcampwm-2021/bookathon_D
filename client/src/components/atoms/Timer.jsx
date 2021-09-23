@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { formatTime } from '../../utils/formatTime';
 
-const TimerText = styled.text`
-  font-size: 80px;
-  font-color: black;
+const TimerText = styled.span`
+  font-size: 160px;
 `;
 
 const Timer = ({ timeState }) => {
