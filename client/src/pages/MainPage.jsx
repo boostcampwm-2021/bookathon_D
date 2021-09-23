@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import TopBar from '@organisms/TopBar';
-import { startTimerAction } from '../actions/actionCreators';
+import {
+  startTimerAction,
+  pauseTimerAction
+} from '../actions/actionCreators';
 import { connect } from 'react-redux';
 
 const MainDiv = styled.div`
@@ -10,16 +13,25 @@ const MainDiv = styled.div`
   flex-direction: column;
 `;
 
-const MainPage = ({ startTimerAction, timeState }) => {
+const MainPage = ({
+  startTimerAction,
+  pauseTimerAction,
+  timeState }) => {
   const startTimer = () => {
     startTimerAction();
   };
+
+  const pauseTimer = () => {
+    pauseTimerAction();
+  }
+
   return (
     <MainDiv>
       <TopBar></TopBar>
-      <p>{timeState.curTask}</p>
+      <p>타이머: {timeState.elapsedTime}</p>
       <label>안녕</label>
       <button onClick={startTimer}>타이머 시작</button>
+      <button onClick={pauseTimer}>타이머 일시정지</button>
     </MainDiv>
   );
 };
@@ -30,4 +42,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   startTimerAction,
+  pauseTimerAction
 })(MainPage);

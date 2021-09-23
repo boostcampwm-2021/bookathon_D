@@ -1,6 +1,7 @@
 import {
     SET_TASK,
     START_TIMER,
+    PAUSE_TIMER,
     INCREMENT_TIMER
 } from '../actions/actionTypes';
 
@@ -32,6 +33,12 @@ export default function timeReducer(state = initialState, action) {
                 ...state,
                 elapsedTime: state.elapsedTime + 1
             };
+        case PAUSE_TIMER:
+            window.clearInterval(setIntervalId);
+            return {
+                ...state,
+                curTimerState: 'paused'
+            }
         default:
             return state;
     }

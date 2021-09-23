@@ -1,6 +1,7 @@
 import {
     SET_TASK,
     START_TIMER,
+    PAUSE_TIMER,
     INCREMENT_TIMER
 } from './actionTypes';
 
@@ -14,4 +15,8 @@ export const startTimerAction = () => (dispatch) => {
     }, 1000);
 
     dispatch({ type: START_TIMER, payload: intervalId });
+}
+
+export const pauseTimerAction = () => (dispatch) => {
+    dispatch({ type: PAUSE_TIMER });
 }
