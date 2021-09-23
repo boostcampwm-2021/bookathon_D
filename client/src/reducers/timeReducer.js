@@ -1,16 +1,20 @@
 import {
-    TEST_ACTION
+    SET_TASK
 } from '../actions/actionTypes';
 
 const initialState = {
-    curTask: ''
+    curTask: null,
+    curTimerState: 'stopped', // running, paused, stopped
+    elapsedTime: 0 // 초 단위
 };
+
+const setIntervalId = null;
 
 export default function timeReducer(state = initialState, action) {
     const { type, payload } = action;
 
     switch (type) {
-        case TEST_ACTION:
+        case SET_TASK:
             return {
                 ...state,
                 curTask: payload

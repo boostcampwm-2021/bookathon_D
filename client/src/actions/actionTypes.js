@@ -1,1 +1,1 @@
-export const TEST_ACTION = 'TEST_ACTION';
+export const SET_TASK = 'SET_TASK';

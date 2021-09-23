@@ -1,5 +1,5 @@
-import { TEST_ACTION } from './actionTypes';
+import { SET_TASK } from './actionTypes';
 
 export const testAction = (newTask) => (dispatch) => {
-    dispatch({ type: TEST_ACTION, payload: newTask });
+    dispatch({ type: SET_TASK, payload: newTask });
 }
