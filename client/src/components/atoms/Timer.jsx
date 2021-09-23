@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { formatTime } from '../../utils/formatTime';
 
 const TimerText = styled.text`
   font-size: 80px;
   font-color: black;
 `;
 
-const Timer = () => {
-  const [Time, setTime] = useState(new Date());
-
-  //   useEffect(() => {
-  //     setTime(new Date());
-  //   }, [Time]);
-
-  return <TimerText>{`${Time.getHours()}:${Time.getMinutes()}:${Time.getSeconds()}`}</TimerText>;
+const Timer = ({ timeState }) => {
+  return <TimerText>{formatTime(timeState.elapsedTime)}</TimerText>;
 };
 
-export default Timer;
+const mapStateToProps = (state) => ({
+  timeState: state.timeState,
+});
+
+export default connect(mapStateToProps)(Timer);
+
