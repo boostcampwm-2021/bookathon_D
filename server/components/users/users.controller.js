@@ -1,7 +1,7 @@
 const service = require('./users.service');
 
 const register = async (req, res, next) => {
-  await service.addUser(req.body.id, req.body.password);
+  await service.addUser(req.body.name, req.body.pwd);
   res.json({'status': 'success'});
 }
 
