@@ -1,8 +1,16 @@
 // 실질적인로직이 실행되는곳
 const model = require('./users.model');
 
-const getUserData = id =>{
-  const userList = model.findUserAll(id);
+const addUser = (id, password) => new Promise((resolve) => {
+  const user = new model.User({
+    id: id,
+    password: password
+  })
+  user.save((err) => {
+    resolve(true);
+  });
+});
 
-  return {1:'당근'}
+module.exports = {
+  addUser
 }

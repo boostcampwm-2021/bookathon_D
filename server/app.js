@@ -8,6 +8,7 @@ var MongoStore = require('connect-mongo');
 
 dotenv.config();
 
+var database = require('./database');
 var components = require('./components');
 
 var app = express();
