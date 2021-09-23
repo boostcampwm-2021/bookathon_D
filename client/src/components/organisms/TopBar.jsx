@@ -61,6 +61,8 @@ const TopBar = () => {
   const OpenEasterEgg = () => {
     setEasterEggConfig(true);
   };
+
+  const closeLoginModal = () => { setProfileFlag(false); }
   useEffect(() => {
   }, [profileFlag]);
 
@@ -77,7 +79,7 @@ const TopBar = () => {
           <img src={carrotImg} />
         </Profile>
       </TopBarDiv>
-      {profileFlag && <LoginModal />}
+      {profileFlag && <LoginModal closeLoginModal={closeLoginModal} />}
       {/* {profileFlag && <CalenderModal />} */}
       {easterEggConfig && (
         <>

@@ -33,9 +33,12 @@ const LoginButton = styled.button`
   cursor: pointer;
   font-size: 16px;
 `;
-const LoginModal = () => {
+const LoginModal = ({ closeLoginModal }) => {
   const history = useHistory();
-  const changeToLoginPage = () => history.push('/login');
+  const changeToLoginPage = () => {
+    closeLoginModal();
+    history.push('/login')
+  };
   return (
     <LoginDiv>
       <LoginOuterDiv>
