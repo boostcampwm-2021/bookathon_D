@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import TopBar from '@organisms/TopBar';
 import {
   startTimerAction,
-  pauseTimerAction
+  pauseTimerAction,
+  stopTimerAction
 } from '../actions/actionCreators';
 import { connect } from 'react-redux';
 
@@ -16,6 +17,7 @@ const MainDiv = styled.div`
 const MainPage = ({
   startTimerAction,
   pauseTimerAction,
+  stopTimerAction,
   timeState }) => {
   const startTimer = () => {
     startTimerAction();
@@ -25,6 +27,10 @@ const MainPage = ({
     pauseTimerAction();
   }
 
+  const stopTimer = () => {
+    stopTimerAction();
+  }
+
   return (
     <MainDiv>
       <TopBar></TopBar>
@@ -32,6 +38,7 @@ const MainPage = ({
       <label>안녕</label>
       <button onClick={startTimer}>타이머 시작</button>
       <button onClick={pauseTimer}>타이머 일시정지</button>
+      <button onClick={stopTimer}>타이머 종료</button>
     </MainDiv>
   );
 };
@@ -42,5 +49,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   startTimerAction,
-  pauseTimerAction
+  pauseTimerAction,
+  stopTimerAction
 })(MainPage);

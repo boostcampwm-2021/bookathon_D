@@ -2,16 +2,16 @@ import {
     SET_TASK,
     START_TIMER,
     PAUSE_TIMER,
+    STOP_TIMER,
     INCREMENT_TIMER
 } from '../actions/actionTypes';
 
 const initialState = {
     curTask: null,
     curTimerState: 'stopped', // running, paused, stopped
-    elapsedTime: 0 // 초 단위
+    elapsedTime: 0, // 초 단위
+    setIntervalId: null
 };
-
-let setIntervalId = null;
 
 export default function timeReducer(state = initialState, action) {
     const { type, payload } = action;
@@ -23,9 +23,9 @@ export default function timeReducer(state = initialState, action) {
                 curTask: payload
             };
         case START_TIMER:
-            setIntervalId = payload;
             return {
                 ...state,
+                setIntervalId: payload,
                 curTimerState: 'running'
             };
         case INCREMENT_TIMER:
@@ -34,10 +34,19 @@ export default function timeReducer(state = initialState, action) {
                 elapsedTime: state.elapsedTime + 1
             };
         case PAUSE_TIMER:
-            window.clearInterval(setIntervalId);
+            window.clearInterval(state.setIntervalId);
             return {
                 ...state,
+                setIntervalId: null,
                 curTimerState: 'paused'
+            }
+        case STOP_TIMER:
+            window.clearInterval(state.setIntervalId);
+            return {
+                ...state,
+                setIntervalId: null,
+                elapsedTime: 0,
+                curTimerState: 'stopped'
             }
         default:
             return state;
