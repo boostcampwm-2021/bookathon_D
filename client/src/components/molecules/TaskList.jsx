@@ -39,6 +39,8 @@ const TaskListItems = styled.ul`
   box-shadow: 2px 2px 3px #d1d1d1;
   border-radius: 5px;
   border: 1px solid #ececec;
+  max-height: 250px;
+  overflow: auto;
 `;
 
 const TaskListItem = styled.li`
@@ -69,11 +71,11 @@ const TaskList = ({ timeState, setTaskAction }) => {
         <TaskListContainer>
             <ShowTaskDropdownBtn
                 onClick={toggleTaskList}
-                disabled={timeState.curTask}
+                disabled={timeState.curTask && timeState.curTimerState !== 'stopped'}
             >작업 선택</ShowTaskDropdownBtn>
             {shouldShowTaskList && (
                 <TaskListItems>
-                    {['작업1', '작업2', '작업3', '작업4'].map((item, idx) => (
+                    {['작업1', '작업2', '작업3', '작업4', '작업5', '작업6', '작업7'].map((item, idx) => (
                         <TaskListItem key={idx} onClick={applyTask}>{item}</TaskListItem>
                     ))}
                 </TaskListItems>
