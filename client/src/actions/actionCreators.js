@@ -4,7 +4,7 @@ import {
     INCREMENT_TIMER
 } from './actionTypes';
 
-export const testAction = (newTask) => (dispatch) => {
+export const setTaskAction = (newTask) => (dispatch) => {
     dispatch({ type: SET_TASK, payload: newTask });
 }
 
