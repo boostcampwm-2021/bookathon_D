@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Provider } from 'react-redux';
+import GlobalStyle from './global';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import MainPage from '@pages/MainPage';
 import NotFoundPage from '@pages/NotFoundPage';
@@ -34,6 +35,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <React.StrictMode>
+        <GlobalStyle />
         {!isValidBrowser && <ErrorPage message={'Chrome 브라우저만 지원합니다😥'} />}
         {windowSize < 800 && <ErrorPage message={'화면 크기는 최소 800px 이상이어야 합니다😅'} />}
         <BrowserRouter>
