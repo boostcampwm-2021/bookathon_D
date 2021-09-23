@@ -11,6 +11,10 @@ module.exports = {
     extensions: ['.js', '.jsx', '.css', '.scss', '.json'],
     alias: {
       '@pages': path.resolve(__dirname, 'src/pages/'),
+      '@img': path.resolve(__dirname, 'src/assets/img/'),
+      '@atoms': path.resolve(__dirname, 'src/components/atoms'),
+      '@molecules': path.resolve(__dirname, 'src/components/molecules'),
+      '@organisms': path.resolve(__dirname, 'src/components/organisms'),
     },
   },
 
