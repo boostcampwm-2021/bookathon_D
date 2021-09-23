@@ -2,6 +2,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var dotenv = require('dotenv');
+var session = require('express-session');
+var MongoStore = require('connect-mongo');
+
+dotenv.config();
 
 var components = require('./components');
 
@@ -14,5 +19,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client/public')));
 
 app.use('/', components);
+
+app.use(session({
+  secret: 'secret',
+  saveUninitialized: false,
+  resave: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.DB_URL,
+    touchAfter: 24 * 3600
+  })
+}));
 
 module.exports = app;
