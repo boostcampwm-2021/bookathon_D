@@ -1,0 +1,67 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "prettier", "import"],
+  "rules": {
+    "no-alert": "off",
+    "react/jsx-filename-extension": [
+      2,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
+    "no-unused-vars": "warn",
+    "no-console": "off",
+    "no-alert": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "import/no-unresolved": "off",
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": ["off"],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "react/jsx-one-expression-per-line": [0, { "allow": "none" }],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "react/jsx-props-no-spreading": [
+      0,
+      {
+        "html": "ignore",
+        "custom": "ignore",
+        "explicitSpread": "ignore",
+        "exceptions": []
+      }
+    ],
+    "@typescript-eslint/no-explicit-any": "off"
+  }
+}
