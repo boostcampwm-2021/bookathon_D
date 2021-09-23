@@ -4,6 +4,7 @@ import EasterEgg from '@organisms/EasterEgg';
 import deleteIcon from '@img/deleteIcon.svg';
 import CalenderModal from '@molecules/CalenderModal';
 import LoginModal from '@molecules/LoginModal';
+import carrotImg from '../../assets/img/carrot.svg';
 import styled from 'styled-components';
 
 const DeleteIconImg = styled.img`
@@ -22,12 +23,21 @@ const TopBarImg = styled.img`
   width: 30px;
 `;
 const Profile = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 40px;
   height: 40px;
   border-radius: 50px;
-  background: black;
+  background: #ececec;
   align-self: center;
   margin-right: 10px;
+  cursor: pointer;
+
+  & img {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 const TopBar = () => {
@@ -47,7 +57,9 @@ const TopBar = () => {
     <>
       <TopBarDiv>
         <TopBarImg src={logo} onClick={OpenEasterEgg} />
-        <Profile onClick={isClickProfile}></Profile>
+        <Profile onClick={isClickProfile}>
+          <img src={carrotImg} />
+        </Profile>
       </TopBarDiv>
       {profileFlag && <LoginModal />}
       {/* {profileFlag && <CalenderModal />} */}
