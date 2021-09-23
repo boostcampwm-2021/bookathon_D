@@ -62,7 +62,6 @@ const TopBar = () => {
     setEasterEggConfig(true);
   };
   useEffect(() => {
-    console.log(profileFlag);
   }, [profileFlag]);
 
   const redirectToHome = () => {
