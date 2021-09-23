@@ -1,9 +1,19 @@
 const service = require('./users.service');
 
-const register = () => {
-  return asdf
+const register = () => (req, res, next) => {
+  res.json({'response': 'register'});
 }
-const login = () => {
-  return asdf
+
+const login = (req, res, next) => {
+  res.json({'response': 'login'});
 }
-module.exports = {register,login}
+
+const logout = (req, res, next) => {
+  res.json({'response': 'logout'});
+}
+
+module.exports = {
+  register,
+  login,
+  logout
+}
