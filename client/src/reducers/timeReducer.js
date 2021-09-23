@@ -1,5 +1,7 @@
 import {
-    SET_TASK
+    SET_TASK,
+    START_TIMER,
+    INCREMENT_TIMER
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -8,7 +10,7 @@ const initialState = {
     elapsedTime: 0 // 초 단위
 };
 
-const setIntervalId = null;
+let setIntervalId = null;
 
 export default function timeReducer(state = initialState, action) {
     const { type, payload } = action;
@@ -18,6 +20,17 @@ export default function timeReducer(state = initialState, action) {
             return {
                 ...state,
                 curTask: payload
+            };
+        case START_TIMER:
+            setIntervalId = payload;
+            return {
+                ...state,
+                curTimerState: 'running'
+            };
+        case INCREMENT_TIMER:
+            return {
+                ...state,
+                elapsedTime: state.elapsedTime + 1
             };
         default:
             return state;
