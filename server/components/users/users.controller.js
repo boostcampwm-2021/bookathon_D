@@ -16,7 +16,10 @@ const login = async (req, res, next) => {
     res.json({'status': 'fail', 'message': '비밀번호가 다릅니다.'})
   } else {
     req.session.name = req.body.name;
-    req.session.save(() => res.redirect("/"));
+    // req.session.save(() => res.redirect("/"));
+    req.session.save(() => res.json({
+      'status': 'success'
+  }));
   }
 }
 
