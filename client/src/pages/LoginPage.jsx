@@ -15,7 +15,7 @@ const LoginOuterDiv = styled.div`
   border: 1px solid #23262d;
   border-radius: 5px;
   width: 500px;
-  height: 300px;
+  height: 330px;
   align-items: center;
 `;
 const LoginInnerDiv = styled.div`
@@ -149,6 +149,7 @@ const LoginPage = () => {
         <LoginCreateButton onClick={isCreate === false ? setCreate : createAccount}>
           회원가입
         </LoginCreateButton>
+        <div>비밀번호는 찾을 수 없습니다. 당근을 주신다면 구현할게요 ㅎㅎ..</div>
       </LoginOuterDiv>
     </>
   );
