@@ -4,6 +4,8 @@ import GlobalStyle from './global';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ScheduleTitleModal from '@molecules/ScheduleTitleModal';
 import MainPage from '@pages/MainPage';
+import LoginPage from '@pages/LoginPage';
+import RankingPage from '@pages/RankingPage';
 import NotFoundPage from '@pages/NotFoundPage';
 import ErrorPage from '@pages/ErrorPage';
 import store from './store';
@@ -34,9 +36,12 @@ const App = () => {
     };
   }, []);
 
-
-  const openAddTaskModal = () => { setShouldShowAddTaskModal(true); }
-  const closeAddTaskModal = () => { setShouldShowAddTaskModal(false); }
+  const openAddTaskModal = () => {
+    setShouldShowAddTaskModal(true);
+  };
+  const closeAddTaskModal = () => {
+    setShouldShowAddTaskModal(false);
+  };
 
   return (
     <Provider store={store}>
@@ -46,6 +51,8 @@ const App = () => {
         {windowSize < 800 && <ErrorPage message={'화면 크기는 최소 800px 이상이어야 합니다😅'} />}
         <BrowserRouter>
           <Switch>
+            <Route path="/ranking" component={RankingPage} />
+            <Route path="/login" component={LoginPage} />
             <Route exact path="/" render={() => <MainPage openAddTaskModal={openAddTaskModal} />} />
             <Route path="/*" component={NotFoundPage} />
           </Switch>

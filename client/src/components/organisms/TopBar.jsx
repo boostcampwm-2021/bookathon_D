@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import logo from '@img/Logo/logo.svg';
 import CalenderModal from '@molecules/CalenderModal';
+import LoginModal from '@molecules/LoginModal';
 import styled from 'styled-components';
 const TopBarDiv = styled.div`
-  position: relative;
   width: 100vw;
   height: 60px;
   background: #ff8800;
@@ -22,26 +22,24 @@ const Profile = styled.div`
   align-self: center;
   margin-right: 10px;
 `;
-const AddNewTaskBtn = styled.button`
-  position: absolute;
-  top: 17px;
-  right: 20px;
-  background: none;
-  font-size: 16px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  color: #fff;
-`;
 
-const TopBar = ({ openAddTaskModal }) => {
+const TopBar = () => {
+  const [profileFlag, setProfileFlag] = useState(false);
+  const isClickProfile = () => {
+    profileFlag === true ? setProfileFlag(false) : setProfileFlag(true);
+  };
+  useEffect(() => {
+    console.log(profileFlag);
+  }, [profileFlag]);
   return (
-    <TopBarDiv>
-      <TopBarImg src={logo} />
-      <Profile>ㅇㅇ</Profile>
-      <CalenderModal />
-      <AddNewTaskBtn onClick={openAddTaskModal}>새 작업 추가</AddNewTaskBtn>
-    </TopBarDiv>
+    <>
+      <TopBarDiv>
+        <TopBarImg src={logo} />
+        <Profile onClick={isClickProfile}></Profile>
+      </TopBarDiv>
+      {profileFlag && <LoginModal />}
+      {/* {profileFlag && <CalenderModal />} */}
+    </>
   );
 };
 

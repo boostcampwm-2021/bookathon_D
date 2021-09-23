@@ -17,8 +17,6 @@ const ScheduleTitleModalDiv = styled.div`
   width: 500px;
   height: 300px;
   align-items: center;
-
-
 `;
 
 const CloseBtn = styled.button`
@@ -28,7 +26,7 @@ const CloseBtn = styled.button`
   cursor: pointer;
   background: none;
   border: none;
-  outline:none;
+  outline: none;
 
   & svg {
     width: 30px;
@@ -53,7 +51,11 @@ const Background = styled.div`
 const ModalTitle = styled.small`
   font-size: 18px;
 `;
-
+const ModalInput = styled.input`
+  width: 300px;
+  height: 50px;
+  font-size: 16px;
+`;
 const ModalButton = styled.button`
   background: #28a745;
   border-radius: 5px;
@@ -81,7 +83,7 @@ const ScheduleTitleModal = ({ setTaskAction, timeState, closeAddTaskModal }) => 
           <CloseIcon />
         </CloseBtn>
         {!timeState.curTask && <ModalTitle>추가할 작업을 입력해주세요.</ModalTitle>}
-        <input type="text" value={taskName} onChange={handleTaskNameChange} />
+        <ModalInput type="text" value={taskName} onChange={handleTaskNameChange} />
         <ModalButton onClick={setTask}>새 작업 추가</ModalButton>
       </ScheduleTitleModalDiv>
     </>

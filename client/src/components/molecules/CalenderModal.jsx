@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+const CalenderDiv = styled.div`
+  position: absolute;
+  left: ${window.screen.width - 400}px;
   display: flex;
-  flex-direction: row-reverse;
 `;
 const CalenderOuterDiv = styled.div`
-  margin-top: 60px;
+  top: 60px;
   width: 400px;
   height: 400px;
   position: absolute;
@@ -17,10 +16,12 @@ const CalenderOuterDiv = styled.div`
 `;
 
 const CalenderModal = () => {
+  const firstDate = new Date();
+  const lastDate = new Date();
   return (
-    <Container>
+    <CalenderDiv>
       <CalenderOuterDiv></CalenderOuterDiv>
-    </Container>
+    </CalenderDiv>
   );
 };
 

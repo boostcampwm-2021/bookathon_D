@@ -19,9 +19,8 @@ const MainPage = ({ openAddTaskModal }) => {
 
   return (
     <MainDiv>
-      <TopBar
-        openAddTaskModal={openAddTaskModal} />
-      <MiddleBar />
+      <TopBar />
+      <MiddleBar openAddTaskModal={openAddTaskModal} />
     </MainDiv>
   );
 };

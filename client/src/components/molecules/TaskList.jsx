@@ -5,9 +5,9 @@ import styled from 'styled-components';
 
 const TaskListContainer = styled.div`
   position: relative;
-  width: 450px;
+  width: 550px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
 const ShowTaskDropdownBtn = styled.button`
@@ -22,8 +22,8 @@ const ShowTaskDropdownBtn = styled.button`
   font-size: 16px;
 
   &:disabled {
-      background-color: #e5e5e5;
-      cursor: not-allowed;
+    background-color: #e5e5e5;
+    cursor: not-allowed;
   }
 `;
 
@@ -47,43 +47,58 @@ const TaskListItem = styled.li`
   cursor: pointer;
 
   & + li {
-      border-top: 1px solid #c5c5c5;
+    border-top: 1px solid #c5c5c5;
   }
 
   &:hover {
-      background-color: #e5e5e5;
+    background-color: #e5e5e5;
   }
 `;
+const AddNewTaskBtn = styled.button`
+  background: #28a745;
+  border-radius: 5px;
+  width: 235px;
+  height: 60px;
+  outline: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+`;
 
-const TaskList = ({ timeState, setTaskAction }) => {
-    const [shouldShowTaskList, setShouldShowTaskList] = useState(false);
+const TaskList = ({ timeState, setTaskAction, openAddTaskModal }) => {
+  const [shouldShowTaskList, setShouldShowTaskList] = useState(false);
 
-    const toggleTaskList = () => { setShouldShowTaskList(!shouldShowTaskList); }
+  const toggleTaskList = () => {
+    setShouldShowTaskList(!shouldShowTaskList);
+  };
 
-    const applyTask = (e) => {
-        toggleTaskList();
-        setTaskAction(e.target.textContent);
-    }
+  const applyTask = (e) => {
+    toggleTaskList();
+    setTaskAction(e.target.textContent);
+  };
 
-    return (
-        <TaskListContainer>
-            <ShowTaskDropdownBtn
-                onClick={toggleTaskList}
-                disabled={timeState.curTask}
-            >작업 선택</ShowTaskDropdownBtn>
-            {shouldShowTaskList && (
-                <TaskListItems>
-                    {['작업1', '작업2', '작업3', '작업4'].map((item, idx) => (
-                        <TaskListItem key={idx} onClick={applyTask}>{item}</TaskListItem>
-                    ))}
-                </TaskListItems>
-            )}
-        </TaskListContainer>
-    );
-}
+  return (
+    <TaskListContainer>
+      <ShowTaskDropdownBtn onClick={toggleTaskList} disabled={timeState.curTask}>
+        작업 선택
+      </ShowTaskDropdownBtn>
+      {shouldShowTaskList && (
+        <TaskListItems>
+          {['작업1', '작업2', '작업3', '작업4'].map((item, idx) => (
+            <TaskListItem key={idx} onClick={applyTask}>
+              {item}
+            </TaskListItem>
+          ))}
+        </TaskListItems>
+      )}
+      <AddNewTaskBtn onClick={openAddTaskModal}>새 작업 추가</AddNewTaskBtn>
+    </TaskListContainer>
+  );
+};
 
 const mapStateToProps = (state) => ({
-    timeState: state.timeState
+  timeState: state.timeState,
 });
 
 export default connect(mapStateToProps, { setTaskAction })(TaskList);

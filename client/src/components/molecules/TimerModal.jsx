@@ -1,13 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PlayIcon from '../atoms/PlayIcon';
 import PauseIcon from '../atoms/PauseIcon';
 import StopIcon from '../atoms/StopIcon';
 import styled from 'styled-components';
-import {
-  startTimerAction,
-  pauseTimerAction,
-  stopTimerAction
-} from '../../actions/actionCreators';
+import { startTimerAction, pauseTimerAction, stopTimerAction } from '../../actions/actionCreators';
 import { connect } from 'react-redux';
 
 const TimerModalDiv = styled.div`
@@ -42,12 +38,7 @@ const TimerModalBtn = styled.button`
   }
 `;
 
-const TimerModal = ({
-  startTimerAction,
-  pauseTimerAction,
-  stopTimerAction,
-  timeState
-}) => {
+const TimerModal = ({ startTimerAction, pauseTimerAction, stopTimerAction, timeState }) => {
   const startTimer = () => {
     startTimerAction();
   };
@@ -70,16 +61,10 @@ const TimerModal = ({
           >
             <PlayIcon />
           </TimerModalBtn>
-          <TimerModalBtn
-            onClick={pauseTimer}
-            disabled={timeState.curTimerState !== 'running'}
-          >
+          <TimerModalBtn onClick={pauseTimer} disabled={timeState.curTimerState !== 'running'}>
             <PauseIcon />
           </TimerModalBtn>
-          <TimerModalBtn
-            onClick={stopTimer}
-            disabled={timeState.curTimerState === 'stopped'}
-          >
+          <TimerModalBtn onClick={stopTimer} disabled={timeState.curTimerState === 'stopped'}>
             <StopIcon />
           </TimerModalBtn>
         </TimerBtns>
@@ -90,11 +75,11 @@ const TimerModal = ({
 };
 
 const mapStateToProps = (state) => ({
-  timeState: state.timeState
+  timeState: state.timeState,
 });
 
 export default connect(mapStateToProps, {
   startTimerAction,
   pauseTimerAction,
-  stopTimerAction
+  stopTimerAction,
 })(TimerModal);

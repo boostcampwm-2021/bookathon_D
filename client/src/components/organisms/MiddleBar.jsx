@@ -13,14 +13,13 @@ const MiddleBarDiv = styled.div`
   align-items: center;
 `;
 
-
-const MiddleBar = () => {
+const MiddleBar = ({ openAddTaskModal }) => {
   return (
     <MiddleBarDiv>
       <ScheduleTitle />
       <Timer />
       <TimerModal />
-      <TaskList />
+      <TaskList openAddTaskModal={openAddTaskModal} />
     </MiddleBarDiv>
   );
 };
