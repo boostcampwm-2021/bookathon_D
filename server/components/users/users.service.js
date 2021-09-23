@@ -1,10 +1,11 @@
 // 실질적인로직이 실행되는곳
 const model = require('./users.model');
 
-const addUser = (id, password) => new Promise((resolve) => {
+const addUser = (name, pwd) => new Promise((resolve) => {
   const user = new model.User({
-    id: id,
-    password: password
+    name: name,
+    pwd: pwd,
+    sessionid: 0
   })
   user.save((err) => {
     resolve(true);
