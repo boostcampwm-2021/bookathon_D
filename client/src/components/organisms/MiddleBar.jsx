@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Timer from '@atoms/Timer';
 import TimerModal from '@molecules/TimerModal';
 import ScheduleTitle from '@atoms/ScheduleTitle';
+import TaskList from '../molecules/TaskList';
 import styled from 'styled-components';
 const MiddleBarDiv = styled.div`
   margin-top: 40px;
@@ -11,23 +12,15 @@ const MiddleBarDiv = styled.div`
   justify-content: space-evenly;
   align-items: center;
 `;
-const MiddleBarButton = styled.button`
-  background: #28a745;
-  border-radius: 5px;
-  width: 235px;
-  height: 60px;
-  outline: none;
-  border: none;
-  color: white;
-`;
-const TopBarImg = styled.img``;
+
+
 const MiddleBar = () => {
   return (
     <MiddleBarDiv>
       <ScheduleTitle />
       <Timer />
       <TimerModal />
-      <MiddleBarButton>작업선택</MiddleBarButton>
+      <TaskList />
     </MiddleBarDiv>
   );
 };
