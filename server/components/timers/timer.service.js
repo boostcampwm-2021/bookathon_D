@@ -6,15 +6,17 @@ const insertTime = async (name, time) =>{
     const todayString = new Date().toJSON()
     const timeData = {}
     timeData[todayString] = time
-    const userList = await User.findOneAndUpdate({name},{
+    const docs = await User.findOneAndUpdate({name},{
       $inc:{today:time,total:time},
       $push:{timelog:timeData}
     });
-    return userList
+    return docs
   } catch (error) {
     console.log(error);
     return false
   }
 }
+
+
 
 module.exports = {insertTime}
