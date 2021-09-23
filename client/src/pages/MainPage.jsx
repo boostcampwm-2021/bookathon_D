@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import TopBar from '@organisms/TopBar';
 import MiddleBar from '@organisms/MiddleBar';
-import { testAction } from '../actions/actionCreators';
 import { setTaskAction } from '../actions/actionCreators';
 import { connect } from 'react-redux';
 
@@ -15,11 +13,8 @@ const MainDiv = styled.div`
 `;
 
 const MainPage = ({ openAddTaskModal }) => {
-  const [taskName, setTaskName] = useState('');
-
   return (
     <MainDiv>
-      <TopBar />
       <MiddleBar openAddTaskModal={openAddTaskModal} />
     </MainDiv>
   );

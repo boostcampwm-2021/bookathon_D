@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import GlobalStyle from './global';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ScheduleTitleModal from '@molecules/ScheduleTitleModal';
+import TopBar from '@organisms/TopBar';
 import MainPage from '@pages/MainPage';
 import LoginPage from '@pages/LoginPage';
 import RankingPage from '@pages/RankingPage';
@@ -50,6 +51,7 @@ const App = () => {
         {!isValidBrowser && <ErrorPage message={'Chrome 브라우저만 지원합니다😥'} />}
         {windowSize < 800 && <ErrorPage message={'화면 크기는 최소 800px 이상이어야 합니다😅'} />}
         <BrowserRouter>
+          <TopBar />
           <Switch>
             <Route path="/ranking" component={RankingPage} />
             <Route path="/login" component={LoginPage} />
