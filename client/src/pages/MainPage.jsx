@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const MainDiv = styled.div`
+  display: flex;
+`;
+
 const MainPage = () => {
   return (
-    <div>
+    <MainDiv>
       <label>안녕</label>
-    </div>
+    </MainDiv>
   );
 };
 
