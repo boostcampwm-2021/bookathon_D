@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 const ScheduleTitleText = styled.text`
@@ -6,8 +7,12 @@ const ScheduleTitleText = styled.text`
   font-color: black;
 `;
 
-const ScheduleTitle = () => {
-  return <ScheduleTitleText>현재 작업: 부커톤 프론트엔드 구현</ScheduleTitleText>;
+const ScheduleTitle = ({ timeState }) => {
+  return <ScheduleTitleText>{timeState.curTask ? `현재 작업: ${timeState.curTask}` : '현재 작업이 없습니다.'}</ScheduleTitleText>;
 };
 
-export default ScheduleTitle;
+const mapStateToProps = (state) => ({
+  timeState: state.timeState,
+});
+
+export default connect(mapStateToProps)(ScheduleTitle);
