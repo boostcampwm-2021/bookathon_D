@@ -13,22 +13,30 @@ var components = require('./components');
 
 var app = express();
 
+app.use(session({
+  key: 'user',
+  secret: 'secret',
+  saveUninitialized: true,
+  resave: true,
+  store: MongoStore.create({
+    mongoUrl: process.env.DB_URL,
+    touchAfter: 24 * 3600
+  }),
+  cookie: {
+    maxAge: 24000 * 60 * 60
+  }
+}));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client/public')));
 
-app.use('/', components);
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, "..", "public/index.html"));
+})
 
-app.use(session({
-  secret: 'secret',
-  saveUninitialized: false,
-  resave: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.DB_URL,
-    touchAfter: 24 * 3600
-  })
-}));
+app.use('/', components);
 
 module.exports = app;
