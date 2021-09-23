@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Timer from '@atoms/Timer';
+import TimerModal from '@molecules/TimerModal';
 import ScheduleTitle from '@atoms/ScheduleTitle';
 import styled from 'styled-components';
 const MiddleBarDiv = styled.div`
@@ -24,6 +25,7 @@ const MiddleBar = () => {
     <MiddleBarDiv>
       <ScheduleTitle />
       <Timer />
+      <TimerModal />
       <MiddleBarButton>작업선택</MiddleBarButton>
     </MiddleBarDiv>
   );
