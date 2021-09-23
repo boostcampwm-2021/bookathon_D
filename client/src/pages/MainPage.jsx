@@ -12,10 +12,16 @@ const MainDiv = styled.div`
   height: 100vh;
 `;
 
-const MainPage = ({ openAddTaskModal }) => {
+const MainPage = ({
+  openAddTaskModal,
+  openSelectTaskModal
+}) => {
   return (
     <MainDiv>
-      <MiddleBar openAddTaskModal={openAddTaskModal} />
+      <MiddleBar
+        openAddTaskModal={openAddTaskModal}
+        openSelectTaskModal={openSelectTaskModal}
+      />
     </MainDiv>
   );
 };
