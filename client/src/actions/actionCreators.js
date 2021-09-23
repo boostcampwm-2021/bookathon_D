@@ -34,6 +34,6 @@ export const initializeTasksAction = () => async (dispatch) => {
 }
 
 export const addANewTaskAction = (newTaskName) => async (dispatch) => {
-    await fetch();
-    dispatch({ type: ADD_A_NEW_TASK });
+    // await fetch();
+    // dispatch({ type: ADD_A_NEW_TASK });
 }

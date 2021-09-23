@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { setTaskAction, timeState } from '../../actions/actionCreators';
+import { addANewTaskAction } from '../../actions/actionCreators';
 import CloseIcon from '../atoms/closeIcon';
 const ScheduleTitleModalDiv = styled.div`
   display: flex;
@@ -54,6 +54,14 @@ const ModalTitle = styled.small`
   font-size: 18px;
 `;
 
+const ModalInput = styled.input`
+  padding: 8px 10px;
+  font-size: 16px;
+  border: 1px solid #23262d;
+  border-radius: 5px;
+  width: 300px;
+`;
+
 const ModalButton = styled.button`
   background: #28a745;
   border-radius: 5px;
@@ -62,16 +70,19 @@ const ModalButton = styled.button`
   outline: none;
   border: none;
   color: white;
+  cursor: pointer;
+  font-size: 16px;
 `;
 
-const ScheduleTitleModal = ({ setTaskAction, timeState, closeAddTaskModal }) => {
-  const [taskName, setTaskName] = useState('');
-  const handleTaskNameChange = (e) => {
-    setTaskName(e.target.value);
+const ScheduleTitleModal = ({ addANewTaskAction, closeAddTaskModal }) => {
+  const [newTaskName, setNewTaskName] = useState('');
+  const handleNewTaskNameChange = (e) => {
+    setNewTaskName(e.target.value);
   };
 
-  const setTask = () => {
-    setTaskAction(taskName);
+  const addANewTask = () => {
+    addANewTaskAction(newTaskName);
+    closeAddTaskModal();
   };
   return (
     <>
@@ -80,9 +91,9 @@ const ScheduleTitleModal = ({ setTaskAction, timeState, closeAddTaskModal }) => 
         <CloseBtn onClick={closeAddTaskModal}>
           <CloseIcon />
         </CloseBtn>
-        {!timeState.curTask && <ModalTitle>추가할 작업을 입력해주세요.</ModalTitle>}
-        <input type="text" value={taskName} onChange={handleTaskNameChange} />
-        <ModalButton onClick={setTask}>새 작업 추가</ModalButton>
+        <ModalTitle>추가할 작업을 입력해주세요.</ModalTitle>
+        <ModalInput type="text" value={newTaskName} onChange={handleNewTaskNameChange} />
+        <ModalButton onClick={addANewTask}>새 작업 추가</ModalButton>
       </ScheduleTitleModalDiv>
     </>
   );
@@ -91,5 +102,5 @@ const mapStateToProps = (state) => ({
   timeState: state.timeState,
 });
 export default connect(mapStateToProps, {
-  setTaskAction,
+  addANewTaskAction,
 })(ScheduleTitleModal);
