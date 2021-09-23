@@ -4,6 +4,8 @@ import {
     PAUSE_TIMER,
     STOP_TIMER,
     INCREMENT_TIMER,
+    INITIALIZE_TASKS,
+    ADD_A_NEW_TASK
 } from './actionTypes';
 
 export const setTaskAction = (newTask) => (dispatch) => {
@@ -24,4 +26,14 @@ export const pauseTimerAction = () => (dispatch) => {
 
 export const stopTimerAction = () => (dispatch) => {
     dispatch({ type: STOP_TIMER });
+}
+
+export const initializeTasksAction = () => async (dispatch) => {
+    const taskData = await fetch();
+    dispatch({ type: INITIALIZE_TASKS, payload: {} });
+}
+
+export const addANewTaskAction = (newTaskName) => async (dispatch) => {
+    await fetch();
+    dispatch({ type: ADD_A_NEW_TASK });
 }

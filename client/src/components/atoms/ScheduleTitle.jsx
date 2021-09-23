@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-const ScheduleTitleText = styled.div`
+const ScheduleTitleText = styled.span`
   font-size: 20px;
   font-color: black;
 `;

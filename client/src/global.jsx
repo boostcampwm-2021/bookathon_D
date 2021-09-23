@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'SCDream';
-    src: /Users/maxcha/bookathon_D/client/src/assets/font/SCDream5.otf format('otf');
+    src: /src/assets/font/SCDream5.otf format('otf');
     font-weight: normal;
     font-style: normal;
   }
