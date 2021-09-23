@@ -38,6 +38,9 @@ export const addANewTaskAction = (newTaskName) => async (dispatch) => {
   await fetch();
   dispatch({ type: ADD_A_NEW_TASK });
 };
+
 export const setLoginState = () => (dispatch) => {
   dispatch({ type: LOGIN_STATE });
 };
+// await fetch();
+// dispatch({ type: ADD_A_NEW_TASK });

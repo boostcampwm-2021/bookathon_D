@@ -12,8 +12,10 @@ const LoginOuterDiv = styled.div`
   width: 200px;
   height: 100px;
   position: absolute;
+  border: 1px solid #23262d;
   border-radius: 5px;
-  background: blue;
+  border-color: #ff8800;
+  background: white;
   text-align: center;
   display: flex;
   justify-content: space-evenly;
