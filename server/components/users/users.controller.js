@@ -1,8 +1,12 @@
 const service = require('./users.service');
 
 const register = async (req, res, next) => {
-  await service.addUser(req.body.name, req.body.pwd);
-  res.json({'status': 'success'});
+  if (await service.isUserExist(req.body.name)) {
+    res.json({'status': 'fail', 'message': '해당 유저가 이미 존재합니다.'})
+  } else {
+    await service.addUser(req.body.name, req.body.pwd);
+    res.json({'status': 'success'});
+  }
 }
 
 const login = (req, res, next) => {
