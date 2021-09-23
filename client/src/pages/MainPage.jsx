@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TopBar from '@organisms/TopBar';
+import MiddleBar from '@organisms/MiddleBar';
 import { testAction } from '../actions/actionCreators';
 import { connect } from 'react-redux';
 
@@ -8,6 +9,8 @@ const MainDiv = styled.div`
   width: 100vw;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  height: 100vh;
 `;
 
 const MainPage = ({ testAction, timeState }) => {
@@ -16,10 +19,9 @@ const MainPage = ({ testAction, timeState }) => {
   };
   return (
     <MainDiv>
-      <TopBar></TopBar>
+      <TopBar />
       <p>{timeState.curTask}</p>
-      <label>안녕</label>
-      <button onClick={myAction}>작업변경</button>
+      <MiddleBar />
     </MainDiv>
   );
 };
