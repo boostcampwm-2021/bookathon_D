@@ -87,7 +87,7 @@ const SelectTaskModal = ({
     closeSelectTaskModal
 }) => {
     const applyTask = (e) => {
-        toggleTaskList();
+        closeSelectTaskModal();
         setTaskAction(e.target.textContent);
     };
 
