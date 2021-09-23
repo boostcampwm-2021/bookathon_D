@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import TopBar from '@organisms/TopBar';
-import ScheduleTitleModal from '@molecules/ScheduleTitleModal';
 import MiddleBar from '@organisms/MiddleBar';
 import { testAction } from '../actions/actionCreators';
 import { setTaskAction } from '../actions/actionCreators';
@@ -15,22 +14,14 @@ const MainDiv = styled.div`
   height: 100vh;
 `;
 
-const MainPage = ({ setTaskAction, timeState }) => {
+const MainPage = ({ openAddTaskModal }) => {
   const [taskName, setTaskName] = useState('');
-
-  const handleTaskNameChange = (e) => {
-    setTaskName(e.target.value);
-  };
-
-  const setTask = () => {
-    setTaskAction(taskName);
-  };
 
   return (
     <MainDiv>
-      <TopBar />
+      <TopBar
+        openAddTaskModal={openAddTaskModal} />
       <MiddleBar />
-      <ScheduleTitleModal />
     </MainDiv>
   );
 };

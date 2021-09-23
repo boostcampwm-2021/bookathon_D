@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { setTaskAction, timeState } from '../../actions/actionCreators';
+import CloseIcon from '../atoms/closeIcon';
 const ScheduleTitleModalDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -16,6 +17,27 @@ const ScheduleTitleModalDiv = styled.div`
   width: 500px;
   height: 300px;
   align-items: center;
+
+
+`;
+
+const CloseBtn = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline:none;
+
+  & svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  &:hover {
+    color: #d1d1d1;
+  }
 `;
 
 const Background = styled.div`
@@ -28,7 +50,9 @@ const Background = styled.div`
   left: 0;
   z-index: 1;
 `;
-const ModalTitle = styled.small``;
+const ModalTitle = styled.small`
+  font-size: 18px;
+`;
 
 const ModalButton = styled.button`
   background: #28a745;
@@ -40,7 +64,7 @@ const ModalButton = styled.button`
   color: white;
 `;
 
-const ScheduleTitleModal = ({ setTaskAction, timeState }) => {
+const ScheduleTitleModal = ({ setTaskAction, timeState, closeAddTaskModal }) => {
   const [taskName, setTaskName] = useState('');
   const handleTaskNameChange = (e) => {
     setTaskName(e.target.value);
@@ -53,7 +77,10 @@ const ScheduleTitleModal = ({ setTaskAction, timeState }) => {
     <>
       <Background />
       <ScheduleTitleModalDiv>
-        {!timeState.curTask && <ModalTitle>작업을 선택해 주세요.</ModalTitle>}
+        <CloseBtn onClick={closeAddTaskModal}>
+          <CloseIcon />
+        </CloseBtn>
+        {!timeState.curTask && <ModalTitle>추가할 작업을 입력해주세요.</ModalTitle>}
         <input type="text" value={taskName} onChange={handleTaskNameChange} />
         <ModalButton onClick={setTask}>새 작업 추가</ModalButton>
       </ScheduleTitleModalDiv>
