@@ -4,18 +4,18 @@ import { useHistory } from 'react-router';
 
 const LoginDiv = styled.div`
   position: absolute;
-  left: ${window.screen.width - 200}px;
+  right: 0;
   display: flex;
 `;
 const LoginOuterDiv = styled.div`
-  top: 60px;
+  top: 2px;
+  right: 0;
   width: 200px;
   height: 100px;
   position: absolute;
-  border: 1px solid #23262d;
+  border: 1px solid #ff8800;
   border-radius: 5px;
-  border-color: #ff8800;
-  background: white;
+  background-color: #ff8800;
   text-align: center;
   display: flex;
   justify-content: space-evenly;
