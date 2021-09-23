@@ -47,6 +47,7 @@ export default function timeReducer(state = initialState, action) {
             window.clearInterval(state.setIntervalId);
             return {
                 ...state,
+                curTask: null,
                 setIntervalId: null,
                 elapsedTime: 0,
                 curTimerState: 'stopped'
