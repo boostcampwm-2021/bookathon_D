@@ -9,6 +9,15 @@ const isUserExist = (name) => new Promise((resolve) => {
   });
 });
 
+const wrongPwd = (name, pwd) => new Promise((resolve) => {
+  model.User.exists({
+    'name': name,
+    'pwd': pwd
+  }, (_, exist) => {
+    resolve(!exist);
+  });
+});
+
 const addUser = (name, pwd) => new Promise((resolve) => {
   const user = new model.User({
     name: name,
@@ -22,5 +31,6 @@ const addUser = (name, pwd) => new Promise((resolve) => {
 
 module.exports = {
   isUserExist,
+  wrongPwd,
   addUser
 }
