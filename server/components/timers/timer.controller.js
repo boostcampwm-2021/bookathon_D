@@ -41,4 +41,16 @@ const dailyTimerCtrl = async (req,res) => {
   }
 }
 
-module.exports = {insertTimerCtrl,AllTimerCtrl,dailyTimerCtrl}
+const topCtrl = async (req,res) => {
+  try {
+    // const id = getSessionId(req)
+    const {limit} = req.query
+    const toptenList = await service.showTopList(limit*1)
+    const status = toptenList ? 201 : 500
+    res.status(status).json(toptenList)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({msg:'serverError'}) 
+  }
+}
+module.exports = {insertTimerCtrl,AllTimerCtrl,dailyTimerCtrl,topCtrl}
