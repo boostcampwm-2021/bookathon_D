@@ -63,15 +63,23 @@ const App = () => {
           <Switch>
             <Route path="/ranking" component={RankingPage} />
             <Route path="/login" component={LoginPage} />
-            <Route exact path="/" render={() => <MainPage
-              openAddTaskModal={openAddTaskModal}
-              openSelectTaskModal={openSelectTaskModal}
-            />} />
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <MainPage
+                  openAddTaskModal={openAddTaskModal}
+                  openSelectTaskModal={openSelectTaskModal}
+                />
+              )}
+            />
             <Route path="/*" component={NotFoundPage} />
           </Switch>
         </BrowserRouter>
         {shouldShowAddTaskModal && <ScheduleTitleModal closeAddTaskModal={closeAddTaskModal} />}
-        {shouldShowSelectTaskModal && <SelectTaskModal closeSelectTaskModal={closeSelectTaskModal} />}
+        {shouldShowSelectTaskModal && (
+          <SelectTaskModal closeSelectTaskModal={closeSelectTaskModal} />
+        )}
       </React.StrictMode>
     </Provider>
   );
