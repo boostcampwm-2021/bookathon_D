@@ -16,7 +16,7 @@ var app = express();
 app.use(session({
   key: 'user',
   secret: 'secret',
-  saveUninitialized: true,
+  saveUninitialized: false,
   resave: true,
   store: MongoStore.create({
     mongoUrl: process.env.DB_URL,
