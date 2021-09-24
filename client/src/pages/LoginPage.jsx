@@ -56,16 +56,13 @@ const LoginSubmitButton = styled.button`
   cursor: pointer;
   font-size: 16px;
 `;
-const LoginCreateButton = styled.button`
-  background: #28a745;
-  border-radius: 5px;
-  width: 130px;
-  height: 40px;
-  outline: none;
-  border: none;
-  color: white;
+const Navlink = styled.span`
   cursor: pointer;
-  font-size: 16px;
+  color: dodgerblue;
+
+  &:hover{
+    color: blue;
+  }
 `;
 
 const LoginPage = () => {
@@ -94,11 +91,6 @@ const LoginPage = () => {
       history.push('/');
     }
   };
-  const setCreate = () => {
-    onReset();
-    setIsCreate(true);
-  };
-
   const onChange = (event) => {
     const { value, name } = event.target;
     setInputs({
@@ -127,6 +119,19 @@ const LoginPage = () => {
     console.log(name, pwd, pwdAgain);
   };
 
+  const handleLoginOrSignup = () => {
+    if (isCreate) {
+      createAccount();
+      return;
+    }
+    getLogin();
+  }
+
+  const toggleMode = () => {
+    onReset();
+    setIsCreate(!isCreate);
+  }
+
   // useEffect(() => {}, [isCreate]);
   return (
     <>
@@ -145,10 +150,13 @@ const LoginPage = () => {
             <LoginPwdInputAgain name="pwdAgain" onChange={onChange} value={pwdAgain} />
           </LoginInnerDiv>
         )}
-        {!isCreate && <LoginSubmitButton onClick={getLogin}>로그인</LoginSubmitButton>}
-        <LoginCreateButton onClick={isCreate === false ? setCreate : createAccount}>
-          회원가입
-        </LoginCreateButton>
+        <LoginSubmitButton
+          onClick={handleLoginOrSignup}>
+          {isCreate ? '회원가입' : '로그인'}
+        </LoginSubmitButton>
+        <Navlink onClick={toggleMode}>
+          {isCreate ? '로그인' : '회원가입'}
+        </Navlink>
         <div>비밀번호는 찾을 수 없습니다. 당근을 주신다면 구현할게요 ㅎㅎ..</div>
       </LoginOuterDiv>
     </>
