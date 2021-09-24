@@ -1,5 +1,6 @@
 import {
   SET_TASK,
+  SAVE_TASK_TIME,
   START_TIMER,
   PAUSE_TIMER,
   STOP_TIMER,
@@ -16,6 +17,22 @@ import axios from 'axios';
 export const setTaskAction = (newTask) => (dispatch) => {
   dispatch({ type: SET_TASK, payload: newTask });
 };
+
+export const saveTaskTimeAction = (timeInSec) => async (dispatch) => {
+  const reqBody = JSON.stringify(timeInSec);
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    widthCredentials: true
+  };
+  try {
+    await axios.post('/timers', reqBody, config);
+    dispatch({ type: SAVE_TASK_TIME })
+  } catch (error) {
+
+  }
+}
 
 export const startTimerAction = () => (dispatch) => {
   const intervalId = setInterval(() => {
@@ -34,13 +51,33 @@ export const stopTimerAction = () => (dispatch) => {
 };
 
 export const initializeTasksAction = () => async (dispatch) => {
-  const taskData = await fetch();
-  dispatch({ type: INITIALIZE_TASKS, payload: {} });
+  const config = { widthCredentials: true };
+  try {
+    const res = await axios.get('/tasks', config);
+    dispatch({ type: INITIALIZE_TASKS, payload: res.data.tasklist });
+    return 0;
+  } catch (error) {
+    return -1;
+  }
 };
 
-export const addANewTaskAction = (newTaskName) => async (dispatch) => {
-  await fetch();
-  dispatch({ type: ADD_A_NEW_TASK });
+export const addANewTaskAction = (newTask) => async (dispatch) => {
+  const reqBody = JSON.stringify(newTask);
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    widthCredentials: true
+  };
+
+  try {
+    const res = await axios.post('/tasks', reqBody, config);
+
+    dispatch({ type: ADD_A_NEW_TASK, payload: res.data.tasklist });
+    return 0;
+  } catch (error) {
+    return -1;
+  }
 };
 
 export const setLoginState = () => (dispatch) => {
@@ -76,6 +113,7 @@ export const loginAction = (loginData) => async (dispatch) => {
   try {
     await axios.post('/users/login', reqBody, config);
     dispatch({ type: LOGIN });
+    dispatch(initializeTasksAction());
     return 0;
   } catch (error) {
     return -1;

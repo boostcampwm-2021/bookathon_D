@@ -1,11 +1,13 @@
 import {
     SET_TASK,
+    SAVE_TASK_TIME,
     START_TIMER,
     PAUSE_TIMER,
     STOP_TIMER,
     INCREMENT_TIMER,
     INITIALIZE_TASKS,
-    ADD_A_NEW_TASK
+    ADD_A_NEW_TASK,
+    LOGOUT
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -25,6 +27,11 @@ export default function timeReducer(state = initialState, action) {
                 ...state,
                 curTask: payload
             };
+        case SAVE_TASK_TIME: {
+            return {
+                ...state
+            };
+        }
         case START_TIMER:
             return {
                 ...state,
@@ -59,7 +66,13 @@ export default function timeReducer(state = initialState, action) {
             };
         case ADD_A_NEW_TASK:
             return {
-                ...state
+                ...state,
+                tasks: payload
+            };
+        case LOGOUT:
+            return {
+                ...state,
+                tasks: []
             };
         default:
             return state;
