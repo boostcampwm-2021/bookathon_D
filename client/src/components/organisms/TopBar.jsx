@@ -10,7 +10,6 @@ import styled from 'styled-components';
 
 const DeleteIconImg = styled.img`
   width: 50px;
-  z-index: 2;
 `;
 const TopBarDiv = styled.div`
   width: 100vw;
@@ -62,13 +61,14 @@ const TopBar = () => {
     setEasterEggConfig(true);
   };
 
-  const closeLoginModal = () => { setProfileFlag(false); }
-  useEffect(() => {
-  }, [profileFlag]);
+  const closeLoginModal = () => {
+    setProfileFlag(false);
+  };
+  useEffect(() => {}, [profileFlag]);
 
   const redirectToHome = () => {
-    history.push('/')
-  }
+    history.push('/');
+  };
 
   return (
     <>
@@ -79,8 +79,8 @@ const TopBar = () => {
           <img src={carrotImg} />
         </Profile>
       </TopBarDiv>
-      {profileFlag && <LoginModal closeLoginModal={closeLoginModal} />}
-      {/* {profileFlag && <CalenderModal />} */}
+      {/* {profileFlag && <LoginModal closeLoginModal={closeLoginModal} />} */}
+      {profileFlag && <CalenderModal />}
       {easterEggConfig && (
         <>
           <EasterEgg />
