@@ -77,7 +77,6 @@ const AuthModalList = styled.ul`
   margin: 0;
   padding: 0;
   width: 200px;
-  height: 150px;
   background-color: #ff8800;
   list-style-type: none;
 `;
@@ -118,6 +117,7 @@ const TopBar = ({
   }, []);
 
   const redirectToHome = () => {
+    closeProfileMenu();
     history.push('/');
   };
 
@@ -131,6 +131,11 @@ const TopBar = ({
     setShouldShowCalendar(true);
   }
 
+  const directToRankingPage = () => {
+    history.push('/ranking');
+    closeProfileMenu();
+  }
+
   const guestModal = (
     <LoginModal closeProfileMenu={closeProfileMenu} />
   );
@@ -138,6 +143,9 @@ const TopBar = ({
     <AuthModalList id="profileMenu">
       <AuthModalListItem>
         <AuthModalBtn onClick={openCalendar}>캘린더</AuthModalBtn>
+      </AuthModalListItem>
+      <AuthModalListItem>
+        <AuthModalBtn onClick={directToRankingPage}>랭킹</AuthModalBtn>
       </AuthModalListItem>
       <AuthModalListItem>
         <AuthModalBtn onClick={logout}>로그아웃</AuthModalBtn>
