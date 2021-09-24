@@ -39,15 +39,15 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      // index.html에 output에서 만들어진 bundle.js를 적용하여, dist에 새로운 html 파일 생성
-      template: `./public/index.html`,
-      favicon: './public/favicon.ico',
+      // index.html에 output에서 만들어진 bundle.js를 적용하여, public에 새로운 html 파일 생성
+      template: `./dist/index.html`,
+      favicon: './dist/favicon.ico',
     }),
   ],
 

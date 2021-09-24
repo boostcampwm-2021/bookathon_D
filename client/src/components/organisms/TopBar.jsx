@@ -9,7 +9,12 @@ import carrotImg from '../../assets/img/carrot.svg';
 import styled from 'styled-components';
 
 const DeleteIconImg = styled.img`
+  position: absolute;
   width: 50px;
+  top: 70px;
+  z-index: 99;
+  left: calc(50% - 25px);
+  cursor: pointer;
 `;
 const TopBarDiv = styled.div`
   width: 100vw;
@@ -64,7 +69,7 @@ const TopBar = () => {
   const closeLoginModal = () => {
     setProfileFlag(false);
   };
-  useEffect(() => {}, [profileFlag]);
+  useEffect(() => { }, [profileFlag]);
 
   const redirectToHome = () => {
     history.push('/');
