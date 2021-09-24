@@ -27,4 +27,14 @@ const showAllTimer = async name =>{
   }
 }
 
-module.exports = {insertTime,showAllTimer}
+const showTopList = async limit =>{
+  try {
+    const docs = await User.find().select('-_id name total').sort({total:-1}).limit(limit);
+    return docs
+  } catch (error) {
+    console.log(error);
+    return false
+  }
+}
+
+module.exports = {insertTime,showAllTimer,showTopList}
