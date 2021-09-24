@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 import logo from '@img/Logo/logo.svg';
 import EasterEgg from '@organisms/EasterEgg';
 import deleteIcon from '@img/deleteIcon.svg';
@@ -7,6 +8,7 @@ import CalenderModal from '@molecules/CalenderModal';
 import LoginModal from '@molecules/LoginModal';
 import carrotImg from '../../assets/img/carrot.svg';
 import styled from 'styled-components';
+import { logoutAction } from '../../actions/actionCreators';
 
 const DeleteIconImg = styled.img`
   position: absolute;
@@ -53,47 +55,119 @@ const Profile = styled.div`
     height: 30px;
   }
 `;
+const AuthModalBtn = styled.button`
+  background: #28a745;
+  border-radius: 5px;
+  width: 100px;
+  height: 40px;
+  outline: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+`;
+const AuthModalList = styled.ul`
+  position:absolute;
+  top: 65px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  height: 150px;
+  background-color: #ff8800;
+  list-style-type: none;
+`;
+const AuthModalListItem = styled.li`
+  padding: 15px;
+`;
 
-const TopBar = () => {
+const TopBar = ({
+  userState,
+  logoutAction
+}) => {
   const history = useHistory();
   const [profileFlag, setProfileFlag] = useState(false);
   const [easterEggConfig, setEasterEggConfig] = useState(false);
-  const closeModal = () => setEasterEggConfig(false);
-  const isClickProfile = () => {
-    profileFlag === true ? setProfileFlag(false) : setProfileFlag(true);
+  const [shouldShowCalendar, setShouldShowCalendar] = useState(false);
+
+  const closeEasterEggModal = () => setEasterEggConfig(false);
+  const toggleProfileDiv = () => {
+    setProfileFlag(!profileFlag);
   };
   const OpenEasterEgg = () => {
     setEasterEggConfig(true);
   };
 
-  const closeLoginModal = () => {
+  const closeProfileMenu = () => {
     setProfileFlag(false);
   };
-  useEffect(() => { }, [profileFlag]);
+
+  useEffect(() => {
+    window.addEventListener('click', (e) => {
+      if (e.target.closest('#profileMenu') || e.target.closest('#profileIcon')) return
+      closeProfileMenu();
+    });
+    window.addEventListener('click', (e) => {
+      if (e.target.closest('#profileMenu') || e.target.closest('#calendar')) return;
+      setShouldShowCalendar(false);
+    })
+  }, []);
 
   const redirectToHome = () => {
     history.push('/');
   };
+
+  const logout = async () => {
+    closeProfileMenu();
+    await logoutAction();
+  }
+
+  const openCalendar = () => {
+    closeProfileMenu()
+    setShouldShowCalendar(true);
+  }
+
+  const guestModal = (
+    <LoginModal closeProfileMenu={closeProfileMenu} />
+  );
+  const authModal = (
+    <AuthModalList id="profileMenu">
+      <AuthModalListItem>
+        <AuthModalBtn onClick={openCalendar}>캘린더</AuthModalBtn>
+      </AuthModalListItem>
+      <AuthModalListItem>
+        <AuthModalBtn onClick={logout}>로그아웃</AuthModalBtn>
+      </AuthModalListItem>
+    </AuthModalList>
+  );
 
   return (
     <>
       <TopBarDiv>
         <TopBarImg src={logo} onClick={OpenEasterEgg} />
         <LogoText onClick={redirectToHome}>자라나라 당근당근</LogoText>
-        <Profile onClick={isClickProfile}>
+        <Profile onClick={toggleProfileDiv} id="profileIcon">
           <img src={carrotImg} />
         </Profile>
       </TopBarDiv>
-      {/* {profileFlag && <LoginModal closeLoginModal={closeLoginModal} />} */}
-      {profileFlag && <CalenderModal />}
+      {profileFlag && (userState.isAuthenticated ? authModal : guestModal)}
+      {shouldShowCalendar && <CalenderModal />}
       {easterEggConfig && (
         <>
           <EasterEgg />
-          <DeleteIconImg src={deleteIcon} onClick={closeModal} />
+          <DeleteIconImg src={deleteIcon} onClick={closeEasterEggModal} />
         </>
       )}
     </>
   );
 };
 
-export default TopBar;
+const mapStateToProps = (state) => ({
+  userState: state.userState
+});
+
+export default connect(mapStateToProps, { logoutAction })(TopBar);

@@ -5,25 +5,23 @@ import styled from 'styled-components';
 
 const CalenderDiv = styled.div`
   position: absolute;
-  left: ${window.screen.width - 410}px;
+  top: 43px;
+  right: 405px;
   display: flex;
 `;
 const CalenderTopBarDiv = styled.div`
   display: flex;
   justify-content: space-evenly;
+  margin: 25px 0;
 `;
 const CalenderOuterDiv = styled.div`
   top: 20px;
   width: 400px;
-  height: 400px;
+  height: 390px;
   position: absolute;
   border: 1px solid #23262d;
   border-radius: 5px;
   background: white;
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-  // align-items: center;
   text-align: center;
 `;
 const DayDiv = styled.div`
@@ -33,14 +31,17 @@ const DayDiv = styled.div`
 const WeekOuterDiv = styled.div`
   display: flex;
   justify-content: space-evenly;
+  margin-bottom: 7px;
 `;
 const WeekInnerDiv = styled.div`
-  width: 52px;
 `;
 const CalenderInnerDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+`;
+const CalendarIcon = styled.img`
+  cursor: pointer;
 `;
 
 const CalenderModal = () => {
@@ -91,17 +92,17 @@ const CalenderModal = () => {
   }, [targetMonth]);
 
   return (
-    <CalenderDiv>
+    <CalenderDiv id="calendar">
       <CalenderOuterDiv>
         <CalenderTopBarDiv>
-          <img
+          <CalendarIcon
             src={leftIcon}
             onClick={function () {
               onchange(true);
             }}
           />
           <div>{targetMonth.date.getMonth() + 1}월</div>
-          <img
+          <CalendarIcon
             src={rightIcon}
             onClick={function () {
               onchange(false);

@@ -6,8 +6,12 @@ import {
   INCREMENT_TIMER,
   INITIALIZE_TASKS,
   ADD_A_NEW_TASK,
+  SIGN_UP,
   LOGIN_STATE,
+  LOGIN,
+  LOGOUT
 } from './actionTypes';
+import axios from 'axios';
 
 export const setTaskAction = (newTask) => (dispatch) => {
   dispatch({ type: SET_TASK, payload: newTask });
@@ -42,5 +46,51 @@ export const addANewTaskAction = (newTaskName) => async (dispatch) => {
 export const setLoginState = () => (dispatch) => {
   dispatch({ type: LOGIN_STATE });
 };
-// await fetch();
-// dispatch({ type: ADD_A_NEW_TASK });
+
+export const signUpAction = (signUpData) => async (dispatch) => {
+  const reqBody = JSON.stringify(signUpData);
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  try {
+    await axios.post('/users/register', reqBody, config);
+
+    dispatch({ type: SIGN_UP });
+    return 0;
+  } catch (error) {
+    return -1;
+  }
+}
+
+export const loginAction = (loginData) => async (dispatch) => {
+  const reqBody = JSON.stringify(loginData);
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  try {
+    await axios.post('/users/login', reqBody, config);
+    dispatch({ type: LOGIN });
+    return 0;
+  } catch (error) {
+    return -1;
+  }
+}
+
+export const logoutAction = () => async (dispatch) => {
+  const config = {
+    widthCredentials: true
+  };
+  try {
+    await axios.post('/users/logout', config);
+
+    dispatch({ type: LOGOUT });
+  } catch (error) {
+
+  }
+}

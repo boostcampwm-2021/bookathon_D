@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import {
+  signUpAction,
+  loginAction
+} from '../actions/actionCreators'
 import styled from 'styled-components';
 import { useHistory } from 'react-router';
 
@@ -65,7 +70,10 @@ const Navlink = styled.span`
   }
 `;
 
-const LoginPage = () => {
+const LoginPage = ({
+  signUpAction,
+  loginAction
+}) => {
   const history = useHistory();
   const [inputs, setInputs] = useState({
     name: '',
@@ -81,14 +89,20 @@ const LoginPage = () => {
       pwdAgain: '',
     });
   };
-  const getLogin = () => {
+  const login = async () => {
     if (name === '') {
       alert('아이디를 입력해주세요.');
+      return;
     }
     if (pwd === '') {
       alert('비밀번호를 입력하세요.');
-    } else {
+      return;
+    }
+    const loginRes = await loginAction({ name, password: pwd });
+    if (loginRes === 0) {
+      onReset();
       history.push('/');
+      return;
     }
   };
   const onChange = (event) => {
@@ -98,11 +112,14 @@ const LoginPage = () => {
       [name]: value,
     });
   };
-  const createAccount = () => {
+  const createAccount = async () => {
     if (pwd !== '' && pwdAgain !== '' && pwd === pwdAgain && name !== '') {
-      alert('정상적으로 회원가입이 진행되었습니다.');
-      onReset();
-      setIsCreate(false);
+      const signUpRes = await signUpAction({ name, password: pwd });
+      if (signUpRes === 0) {
+        onReset();
+        history.push('/');
+        return;
+      }
     }
     if (pwd !== pwdAgain) {
       alert('비밀번호가 일치하지 않습니다.');
@@ -116,7 +133,6 @@ const LoginPage = () => {
     if (pwdAgain === '') {
       alert('한번 더 비밀번호를 입력하세요.');
     }
-    console.log(name, pwd, pwdAgain);
   };
 
   const handleLoginOrSignup = () => {
@@ -124,7 +140,7 @@ const LoginPage = () => {
       createAccount();
       return;
     }
-    getLogin();
+    login();
   }
 
   const toggleMode = () => {
@@ -163,4 +179,7 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default connect(null, {
+  signUpAction,
+  loginAction
+})(LoginPage);

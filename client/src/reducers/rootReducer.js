@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
 import timeReducer from './timeReducer.js';
-import loginReducer from './loginReducer.js';
+import userReducer from './userReducer.js';
 
 export default combineReducers({
   timeState: timeReducer,
-  //   loginState: loginReducer,
+  userState: userReducer,
 });
