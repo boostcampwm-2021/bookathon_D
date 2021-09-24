@@ -33,15 +33,15 @@ const LoginButton = styled.button`
   cursor: pointer;
   font-size: 16px;
 `;
-const LoginModal = ({ closeLoginModal }) => {
+const LoginModal = ({ closeProfileMenu }) => {
   const history = useHistory();
   const changeToLoginPage = () => {
-    closeLoginModal();
+    closeProfileMenu();
     history.push('/login')
   };
   return (
     <LoginDiv>
-      <LoginOuterDiv>
+      <LoginOuterDiv id="profileMenu">
         <LoginButton onClick={changeToLoginPage}>로그인</LoginButton>
       </LoginOuterDiv>
     </LoginDiv>

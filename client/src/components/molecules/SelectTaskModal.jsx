@@ -83,33 +83,37 @@ const TaskListItem = styled.li`
 `;
 
 const SelectTaskModal = ({
-    setTaskAction,
-    closeSelectTaskModal
+  timeState,
+  setTaskAction,
+  closeSelectTaskModal
 }) => {
-    const applyTask = (e) => {
-        closeSelectTaskModal();
-        setTaskAction(e.target.textContent);
-    };
+  const applyTask = (e) => {
+    closeSelectTaskModal();
+    setTaskAction(e.target.textContent);
+  };
 
-    return (
-        <>
-            <Background />
-            <SelectTaskModalContainer>
-                <SelectTaskModalHeader>작업을 선택해 주세요.</SelectTaskModalHeader>
-                <CloseBtn onClick={closeSelectTaskModal}>
-                    <CloseIcon />
-                </CloseBtn>
-                <TaskListItems>
-                    {['작업1', '작업2', '작업3', '작업4', '작업5', '작업6', '작업7'].map((item, idx) => (
-                        <TaskListItem key={idx} onClick={applyTask}>
-                            {item}
-                        </TaskListItem>
-                    ))}
-                </TaskListItems>
-            </SelectTaskModalContainer>
-        </>
-    )
+  return (
+    <>
+      <Background />
+      <SelectTaskModalContainer>
+        <SelectTaskModalHeader>작업을 선택해 주세요.</SelectTaskModalHeader>
+        <CloseBtn onClick={closeSelectTaskModal}>
+          <CloseIcon />
+        </CloseBtn>
+        <TaskListItems>
+          {timeState.tasks.map((item, idx) => (
+            <TaskListItem key={idx} onClick={applyTask}>
+              {item}
+            </TaskListItem>
+          ))}
+        </TaskListItems>
+      </SelectTaskModalContainer>
+    </>
+  )
 }
 
+const mapStateToProps = (state) => ({
+  timeState: state.timeState
+});
 
-export default connect(null, { setTaskAction })(SelectTaskModal);
+export default connect(mapStateToProps, { setTaskAction })(SelectTaskModal);

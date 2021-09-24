@@ -26,7 +26,6 @@ const showAllTimer = async name =>{
     return false
   }
 }
-
 const showTopList = async limit =>{
   try {
     const docs = await User.find().select('-_id name total').sort({total:-1}).limit(limit);

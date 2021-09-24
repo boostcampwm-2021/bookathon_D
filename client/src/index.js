@@ -11,8 +11,8 @@ ReactDOM.render(
 );
 
 window.addEventListener('beforeunload', (e) => {
-  e.preventDefault();
-  e.returnValue = '';
+  // e.preventDefault();
+  // e.returnValue = '';
 });
 
 // If you want to start measuring performance in your app, pass a function

@@ -3,7 +3,12 @@ import PlayIcon from '../atoms/PlayIcon';
 import PauseIcon from '../atoms/PauseIcon';
 import StopIcon from '../atoms/StopIcon';
 import styled from 'styled-components';
-import { startTimerAction, pauseTimerAction, stopTimerAction } from '../../actions/actionCreators';
+import {
+  startTimerAction,
+  pauseTimerAction,
+  stopTimerAction,
+  saveTaskTimeAction
+} from '../../actions/actionCreators';
 import { connect } from 'react-redux';
 
 const TimerModalDiv = styled.div`
@@ -38,7 +43,13 @@ const TimerModalBtn = styled.button`
   }
 `;
 
-const TimerModal = ({ startTimerAction, pauseTimerAction, stopTimerAction, timeState }) => {
+const TimerModal = ({
+  startTimerAction,
+  pauseTimerAction,
+  stopTimerAction,
+  saveTaskTimeAction,
+  timeState
+}) => {
   const startTimer = () => {
     startTimerAction();
   };
@@ -49,6 +60,10 @@ const TimerModal = ({ startTimerAction, pauseTimerAction, stopTimerAction, timeS
 
   const stopTimer = () => {
     stopTimerAction();
+    saveTaskTimeAction({
+      time: timeState.elapsedTime,
+      task: timeState.curTask
+    });
   };
 
   return (
@@ -82,4 +97,5 @@ export default connect(mapStateToProps, {
   startTimerAction,
   pauseTimerAction,
   stopTimerAction,
+  saveTaskTimeAction
 })(TimerModal);

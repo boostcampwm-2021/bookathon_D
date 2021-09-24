@@ -79,7 +79,7 @@ const ScheduleTitleModal = ({ addANewTaskAction, closeAddTaskModal }) => {
   };
 
   const addANewTask = () => {
-    addANewTaskAction(newTaskName);
+    addANewTaskAction({ task: newTaskName });
     closeAddTaskModal();
   };
   return (
